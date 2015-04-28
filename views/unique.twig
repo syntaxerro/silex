@@ -1,22 +1,23 @@
 <head>
 <style>
 li {
-	margin-bottom: 1.5em;
+	margin-bottom: .5em;
 	margin-right: .8em;
+	border: .1em solid;
+	width: 60vw;
+	display: flex;
+	justify-content: center;
+	font-size: 1.3em;
+	padding: .5em;
+	background: #2345AC;
 }
 a {
 	text-decoration: none;
 	color: #cdcdcd;
-	padding: .5em;
-	background: #2345AC;
-	width: 40%;
-
 }
 </style>
 </head>
-
-<br/><br/>
-<ul style='list-style-type: none; display: block; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-around;'>
+<ul style='list-style-type: none; padding: 0; display: flex; align-items: center; flex-direction: column;'>
 {% for item in ips %}
 <li><a href="/silex/{{id}}/ip/{{item}}">{{item}}</a></li>
 {% endfor %}

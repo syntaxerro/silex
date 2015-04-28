@@ -13,23 +13,35 @@ use Symfony\Component\HttpFoundation\Response;
 	$con = new mysqli('localhost', 'root', $pwd, 'secret');
 	
 	switch($id) {
-		case 1: $query = $con->query("SELECT kiedy, ip FROM inj WHERE wpis2=''"); break;
-		case 2: $query = $con->query("SELECT kiedy, ip FROM inj WHERE wpis!=''"); break;
-		case 3: $query = $con->query("SELECT kiedy, ip FROM inj3"); break;
+		case 1: $quWhere=" FROM inj WHERE wpis2=''"; break;
+		case 2: $quWhere=" FROM inj WHERE wpis2!=''"; break;
+		case 3: $quWhere=" FROM inj3 WHERE 1"; break;
+		default: die("No ale nie bylo takiej czesci :("); break;
 	}
 
-	$ips = array(); $when = array();
+	$query = $con->query("SELECT ip, wpis".$quWhere);
+	
+	$ips = array(); $when = array(); $cnt = array();
+	
 	while( $line = $query->fetch_assoc() ) {
 		$datetime = explode(" ", $line['kiedy']);
+		
+		if(!in_array($line['ip'], $ips)) array_push($ips, $line['ip']);  
 
-		if(!in_array($line['ip'], $ips)) array_push($ips, $line['ip']);
 		if(!in_array($datetime[0], $when)) array_push($when, $datetime[0]);
 	} 
 	
-
 	$query->close();	
+	foreach($ips as $locip) {
+		$query = $con->query("SELECT count(1) AS ile".$quWhere." AND ip='$locip'");
+		$fetched = $query->fetch_assoc();
+		array_push($cnt, $fetched['ile']);
+		$query->close();
+	}
+
+	
 	$con->close();
-	return $app['twig']->render('unique.twig', array( 'ips' => $ips, 'when' => $when, 'id' => $id, ));
+	return $app['twig']->render('unique.twig', array( 'ips' => $ips, 'when' => $when, 'cnt' => $cnt,'id' => $id, ));
  });
 
 
@@ -57,7 +69,29 @@ use Symfony\Component\HttpFoundation\Response;
 
  });
  
- $app->get("/silex/", function(Request $req) {
+ $app->get("/silex/{id}/when/{when}", function($id, $when) use ($app, $pwd) {
+	$con = new mysqli("localhost", 'root', $pwd, 'secret');
+	require_once __DIR__."/../myclass.php";
+	
+	switch($id) {
+	case 1: $query = $con->query("SELECT wpis, kiedy FROM inj WHERE wpis2='' AND kiedy LIKE '$when%'"); break;
+	case 2: $query = $con->query("SELECT wpis, kiedy FROM inj WHERE wpis2!='' AND kiedy LIKE '$when%'"); break;
+	case 3: $query = $con->query("SELECT wpis, kiedy FROM inj3 WHERE kiedy LIKE '$when%'"); break;
+	}
+	
+
+	$i=0;
+	while( $line = $query->fetch_assoc() ) {
+		$dane[$i++] = new Tip($line['wpis'], $line['kiedy']);
+	}
+
+	$query->close();
+	$con->close();
+	return $app['twig']->render('ipstory.twig', array( 'dane' => $dane, 'id' => $id, 'ip' => $ip, ) );
+
+ });
+
+$app->get("/silex/", function(Request $req) {
 	return $req->__toString();
 	
  });

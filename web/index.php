@@ -62,7 +62,7 @@ use Symfony\Component\HttpFoundation\Response;
 	
 	switch($id) {
 	case 1: $query = $con->query("SELECT wpis, kiedy FROM inj WHERE wpis2='' AND ip='$ip'"); break;
-	case 2: $query = $con->query("SELECT wpis, kiedy FROM inj WHERE wpis2!='' AND ip='$ip'"); break;
+	case 2: $query = $con->query("SELECT wpis, wpis2, kiedy FROM inj WHERE wpis2!='' AND ip='$ip'"); break;
 	case 3: $query = $con->query("SELECT wpis, kiedy FROM inj3 WHERE ip='$ip'"); break;
 	}
 	

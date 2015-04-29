@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
  $app->get("/silex/unique/{id}", function($id) use ($app, $pwd) {
 	$con = new mysqli('localhost', 'root', $pwd, 'secret');
-	
+	require_once __DIR__."/../myclass.php";	
 	switch($id) {
 		case 1: $quWhere=" FROM inj WHERE wpis2=''"; break;
 		case 2: $quWhere=" FROM inj WHERE wpis2!=''"; break;
@@ -21,14 +21,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 	$query = $con->query("SELECT ip, wpis".$quWhere);
 	
-	$ips = array(); $when = array(); $cnt = array();
+	$ips = array(); $cnt = array();
 	
 	while( $line = $query->fetch_assoc() ) {
-		$datetime = explode(" ", $line['kiedy']);
-		
-		if(!in_array($line['ip'], $ips)) array_push($ips, $line['ip']);  
-
-		if(!in_array($datetime[0], $when)) array_push($when, $datetime[0]);
+		if(!in_array($line['ip'], $ips)) array_push($ips, $line['ip']);
 	} 
 	
 	$query->close();	
@@ -39,9 +35,16 @@ use Symfony\Component\HttpFoundation\Response;
 		$query->close();
 	}
 
+	for($i=0; $i<count($ips); $i++) { 
+		$all[$i] = new TList;
+		$all[$i]->setIp($ips[$i]);
+		$all[$i]->setLicznik($cnt[$i]);
+
+	}
 	
 	$con->close();
-	return $app['twig']->render('unique.twig', array( 'ips' => $ips, 'when' => $when, 'cnt' => $cnt,'id' => $id, ));
+
+	return $app['twig']->render('unique.twig', array( 'all' => $all, 'id' => $id, ));
  });
 
 

@@ -1,46 +1,28 @@
 <head>
 <script src="../../js/jq2.1.3.js"></script>
-<style>
-li {
-	margin-bottom: .5em;
-	margin-right: .8em;
-	border: .1em solid;
-	width: 60vw;
-	display: flex;
-	justify-content: space-around;
-	font-size: 1.3em;
-	padding: .5em;
-	background: #2345AC;
-
-}
-a {
-	text-decoration: none;
-	color: #cdcdcd;
-	
-	display: none;
-}
-</style>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+<script src="../../js/bootstrap.min.js"></script>
 </head>
-<ul style='list-style-type: none; padding: 0; display: flex; align-items: center; flex-direction: column;'>
+<div class="list-group">
 {% for item in all %}
-<a href="/silex/{{id}}/ip/{{item.ip}}">
-<li>
+<a href="/silex/{{id}}/ip/{{item.ip}}" class="list-group-item" style="display: none; justify-content: space-between;">
+
 <span style="font-size: 1.3em;">{{item.ip}}</span>
 <span>{{item.licznik}}</span>
-</li>
+
 </a>
 {% endfor %}
-</ul>
+</div>
 
 <script>
 
-var max = $("ul li").length;
+var max = $("a").length;
 var i=0;
 function petla() {
 	if(i++ < max) setTimeout(function() {
-		$("ul a:nth-child("+i+")").fadeIn(90);
+		$("a:nth-child("+i+")").css('display', 'flex').hide().fadeIn(380);
 		petla();
-	}, 100);
+	}, 80);
 }
 petla();
 </script>

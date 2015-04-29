@@ -41,6 +41,15 @@ use Symfony\Component\HttpFoundation\Response;
 		$all[$i]->setLicznik($cnt[$i]);
 
 	}
+
+	for($i=0; $i < count($all); $i++) {
+		for($j=0; $j < count($all)-1; $j++) 
+			if( $all[$j]->getLicznik() < $all[$j+1]->getLicznik() ) {
+				$buf = $all[$j];
+				$all[$j] = $all[$j+1];
+				$all[$j+1] = $buf;
+			}
+	}
 	
 	$con->close();
 

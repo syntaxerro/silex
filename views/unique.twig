@@ -4,11 +4,29 @@
 <script src="../../js/bootstrap.min.js"></script>
 </head>
 <div class="list-group">
+{% if id==1 %}
+<div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
+<span><b>mySQL inj #1</b> Lista unikalnych wizyt</span>
+<span>Liczba prob</span></div>
+{% endif %}
+
+{% if id==2 %}
+<div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
+<span><b>mySQL inj #2</b> Lista unikalnych wizyt</span>
+<span>Liczba prob</span></div>
+{% endif %}
+
+{% if id==3 %}
+<div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
+<span><b>mySQL inj #3</b> Lista unikalnych wizyt</span>
+<span>Liczba prob</span></div>
+{% endif %}
+
 {% for item in all %}
 <a href="/silex/{{id}}/ip/{{item.ip}}" class="list-group-item" style="display: none; justify-content: space-between;">
 
 <span style="font-size: 1.3em;">{{item.ip}}</span>
-<span>{{item.licznik}}</span>
+<span class="badge">{{item.licznik}}</span>
 
 </a>
 {% endfor %}

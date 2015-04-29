@@ -11,11 +11,13 @@ li {
 	font-size: 1.3em;
 	padding: .5em;
 	background: #2345AC;
-	display: none;
+
 }
 a {
 	text-decoration: none;
 	color: #cdcdcd;
+	
+	display: none;
 }
 </style>
 </head>
@@ -32,14 +34,13 @@ a {
 
 <script>
 
-var i = $("ul li").length;
-
+var max = $("ul li").length;
+var i=0;
 function petla() {
-	if(i-- > 0) setTimeout(function() {
-		$("ul li:nth-child("+i+")").fadeIn(330);
-		console.log(i);
+	if(i++ < max) setTimeout(function() {
+		$("ul a:nth-child("+i+")").fadeIn(90);
 		petla();
-	}, 700);
+	}, 100);
 }
 petla();
 </script>

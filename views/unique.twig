@@ -16,10 +16,9 @@
 
 <script>
 
-var max = $("a").length;
 var i=0;
 function petla() {
-	if(i++ < max) setTimeout(function() {
+	if(i++ < $("a").length) setTimeout(function() {
 		$("a:nth-child("+i+")").css('display', 'flex').hide().fadeIn(380);
 		petla();
 	}, 80);

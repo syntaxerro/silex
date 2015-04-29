@@ -6,19 +6,19 @@
 <div class="list-group">
 {% if id==1 %}
 <div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
-<span><b>mySQL inj #1</b> Lista unikalnych wizyt</span>
+<span id="head_t"><b>mySQL inj #1</b> Lista unikalnych wizyt</span>
 <span>Liczba prob</span></div>
 {% endif %}
 
 {% if id==2 %}
 <div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
-<span><b>mySQL inj #2</b> Lista unikalnych wizyt</span>
+<span id="head_t"><b>mySQL inj #2</b> Lista unikalnych wizyt</span>
 <span>Liczba prob</span></div>
 {% endif %}
 
 {% if id==3 %}
 <div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
-<span><b>mySQL inj #3</b> Lista unikalnych wizyt</span>
+<span id="head_t"><b>mySQL inj #3</b> Lista unikalnych wizyt</span>
 <span>Liczba prob</span></div>
 {% endif %}
 
@@ -35,6 +35,7 @@
 <script>
 
 var i=0;
+$("#head_t").html($("#head_t").html()+": "+$("a").length);
 function petla() {
 	if(i++ < $("a").length) setTimeout(function() {
 		$("a:nth-child("+i+")").css('display', 'flex').hide().fadeIn(380);

@@ -18,9 +18,11 @@ class TList {
 
 	public function getLicznik() { return $this->licznik; }
 
+
 	public function setIp($a) { $this->ip = $a; }
 
 	public function setLicznik($a) { $this->licznik = $a;  }
+
 
 }
 

@@ -19,9 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 		default: die("No ale nie bylo takiej czesci :("); break;
 	}
 
-	$query = $con->query("SELECT ip, wpis".$quWhere);
+	$query = $con->query("SELECT ip".$quWhere);
 	
-	$ips = array(); $cnt = array();
+	$ips = array(); $cnt = array(); $bots = array();
 	
 	while( $line = $query->fetch_assoc() ) {
 		if(!in_array($line['ip'], $ips)) array_push($ips, $line['ip']);
@@ -34,12 +34,11 @@ use Symfony\Component\HttpFoundation\Response;
 		array_push($cnt, $fetched['ile']);
 		$query->close();
 	}
-
+	
 	for($i=0; $i<count($ips); $i++) { 
 		$all[$i] = new TList;
 		$all[$i]->setIp($ips[$i]);
 		$all[$i]->setLicznik($cnt[$i]);
-
 	}
 
 	for($i=0; $i < count($all); $i++) {

@@ -1,13 +1,14 @@
 <?php
 class Tip {
-	private $wpis; private $kiedy;
+	private $wpis; private $kiedy; private $i;
 
-	public function __construct($w, $k) {
-		$this->wpis = $w; $this->kiedy = $k;
+	public function __construct($w, $k, $li) {
+		$this->wpis = $w; $this->kiedy = $k; $this->i=$li;
 	}
 
 	public function getWpis() { return $this->wpis; }
 	public function getKiedy() { return $this->kiedy; }
+	public function getI() { return $this->i; }
 }
 
 class TList {

@@ -89,7 +89,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 	$i=0;
 	while( $line = $query->fetch_assoc() ) {
-		$dane[$i++] = new Tip(addslashes(htmlentities($line['wpis'])), $line['kiedy']);
+		$dane[$i++] = new Tip(htmlentities($line['wpis']), $line['kiedy'], $i);
 	}
 
 	$query->close();

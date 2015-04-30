@@ -58,7 +58,7 @@
 {% endif %}
 
 {% for item in dane %}
-<div class="panel panel-primary" style="display: none;">
+<div class="panel panel-primary" style="display: none;" id="post{{item.i}}">
 	<div class="panel-heading">
 		<h2 class="panel-title">{{item.kiedy}}</h2>
 	</div>
@@ -75,7 +75,7 @@ var i=0;
 
 function petla() {
 	if(i++ < $(".panel").length) setTimeout(function() {
-		$(".panel:nth-child("+i+")").fadeIn(410);
+		$("#post"+i).fadeIn(410);
 		petla();
 	}, 50);
 }

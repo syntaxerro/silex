@@ -74,8 +74,8 @@
 var i=0;
 
 function petla() {
-	if(i++ < $(".panel-primary").length) setTimeout(function() {
-		$(".panel-primary:nth-child("+i+")").fadeIn(410);
+	if(i++ < $(".panel").length) setTimeout(function() {
+		$(".panel:nth-child("+i+")").fadeIn(410);
 		petla();
 	}, 50);
 }

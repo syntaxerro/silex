@@ -102,13 +102,6 @@ use Symfony\Component\HttpFoundation\Response;
 
  });
 
-$app->get("/silex/", function(Request $req) {
-	return $req->__toString();
-	
- });
- $app->get("/", function(Request $req) {
-	return $req->__toString();
-	
- });
+
 $app->run();
 ?>

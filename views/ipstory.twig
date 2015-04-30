@@ -6,7 +6,24 @@
 <title>SQL History</title>
 </head>
 <body>
-
+<ul class="nav nav-pills" style="display: flex; justify-content: space-around;"> 
+{% if id==1 %}
+	<li role="presentation" class="active"><a href="/silex/unique/1">mySQL Injection #1</a></li>
+	<li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
+	<li role="presentation"><a href="/silex/unique/3">mySQL Injection #3</a></li>
+{% endif %}
+{% if id==2 %}
+	<li role="presentation"><a href="/silex/unique/1">mySQL Injection #1</a></li>
+	<li role="presentation" class="active"><a href="/silex/unique/2">mySQL Injection #2</a></li>
+	<li role="presentation"><a href="/silex/unique/3">mySQL Injection #3</a></li>
+{% endif %}
+{% if id==3 %}
+	<li role="presentation"><a href="/silex/unique/1">mySQL Injection #1</a></li>
+	<li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
+	<li role="presentation" class="active"><a href="/silex/unique/3">mySQL Injection #3</a></li>
+{% endif %}
+</ul>
+<br/>
 {% if id==1 %}
 <div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
 	<span id="head_t">

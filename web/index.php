@@ -39,11 +39,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 	// Czy bot?
 	foreach($ips as $locip) {
-		$query = $con->query("SELECT LENGTH(wpis) AS sizew, wpis".$quWhere." AND ip='$locip'");
+		if($id==2) $query = $con->query("SELECT LENGTH(wpis) AS sizew, wpis, wpis2".$quWhere." AND ip='$locip'");
+		else $query = $con->query("SELECT LENGTH(wpis) AS sizew, wpis".$quWhere." AND ip='$locip'");
 		$bt_loc=false;
 		while( $fetched = $query->fetch_assoc() ) {
-			if( $fetched['sizew']>120 //|| 
-				//preg_match("[7-9][0-9]*/=/[7-9][0-9]*", $fetched['wpis']) 
+			if( $fetched['sizew']>120 || 
+				preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis']) ||
+				( isset($fetched['wpis2']) && preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis2']) )
 			) $bt_loc=true;
 		}
 		array_push($bots, $bt_loc);

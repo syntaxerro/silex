@@ -45,7 +45,9 @@ use Symfony\Component\HttpFoundation\Response;
 		while( $fetched = $query->fetch_assoc() ) {
 			if( $fetched['sizew']>120 || 
 				preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis']) ||
-				( isset($fetched['wpis2']) && preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis2']) )
+				preg_match("/0x[0-9]+/", $fetched['wpis']) ||
+				( isset($fetched['wpis2']) && preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis2']) ) ||
+				( isset($fetched['wpis2']) && preg_match("/0x[0-9]+/", $fetched['wpis2']) )
 			) $bt_loc=true;
 		}
 		array_push($bots, $bt_loc);

@@ -46,7 +46,14 @@
 <a href="/silex/{{id}}/ip/{{item.ip}}" class="list-group-item" style="display: none; justify-content: space-between;">
 
 <span style="font-size: 1.3em;">{{item.ip}}</span>
-<span class="badge">{{item.licznik}}</span>
+
+{% if item.bot == true %}
+<span class="label label-danger">{{item.licznik}}</span>
+{% endif %}
+
+{% if item.bot == false %}
+<span class="label label-success">{{item.licznik}}</span>
+{% endif %}
 
 </a>
 {% endfor %}

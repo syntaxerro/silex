@@ -1,12 +1,16 @@
 <?php
 class Tip {
-	private $wpis; private $kiedy; private $i;
+	private $wpis; private $wpis2; private $kiedy; private $i;
 
-	public function __construct($w, $k, $li) {
-		$this->wpis = $w; $this->kiedy = $k; $this->i=$li;
+	public function __construct($w, $ws, $k, $li) {
+		$this->wpis = $w; 
+		$this->kiedy = $k; 
+		$this->i=$li;
+		$this->wpis2=$ws;
 	}
 
 	public function getWpis() { return $this->wpis; }
+	public function getWpis2() { return $this->wpis2; }
 	public function getKiedy() { return $this->kiedy; }
 	public function getI() { return $this->i; }
 }

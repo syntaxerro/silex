@@ -86,11 +86,18 @@ use Symfony\Component\HttpFoundation\Response;
 	default: die("Nie bylo tego :("); break;
 	}
 	
-
 	$i=0;
-	while( $line = $query->fetch_assoc() ) {
-		$dane[$i++] = new Tip(htmlentities($line['wpis']), $line['kiedy'], $i);
+	if($id==2) {
+		while( $line = $query->fetch_assoc() ) {
+			$dane[$i++] = new Tip(htmlentities($line['wpis']), htmlentities($line['wpis2']), $line['kiedy'], $i);
+		}
+	} else {
+		while( $line = $query->fetch_assoc() ) {
+			$dane[$i++] = new Tip(htmlentities($line['wpis']), null, $line['kiedy'], $i);
+		}
 	}
+	
+	
 
 	$query->close();
 	$con->close();

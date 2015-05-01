@@ -12,7 +12,7 @@ body { padding-top: 70px; }
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
-			<ul class="nav nav-pills" style="display: flex; justify-content: space-around; margin-top: .3em;"> 
+			<ul class="nav nav-pills nav-justified"> 
 			{% if id==1 %}
 				<li role="presentation" class="active"><a href="/silex/unique/1">mySQL Injection #1</a></li>
 				<li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
@@ -52,7 +52,7 @@ body { padding-top: 70px; }
 {% endif %}
 <div class="list-group">
 {% for item in all %}
-<a href="/silex/{{id}}/ip/{{item.ip}}" class="list-group-item" style="display: none; justify-content: space-between;">
+<a href="/silex/{{id}}/ip/{{item.ip}}" class="list-group-item" style="display: none; justify-content: space-between;" id="list{{item.i}}">
 
 <span style="font-size: 1.3em;">{{item.ip}}</span>
 
@@ -71,11 +71,11 @@ body { padding-top: 70px; }
 <script>
 
 var i=0;
-$("#head_t").html($("#head_t").html()+": "+$("a").length);
+$("#head_t").html($("#head_t").html()+": "+$(".list-group-item").length);
 function petla() {
-	if(i++ < $("a").length) setTimeout(function() {
-		$("a:nth-child("+i+")").css('display', 'flex').hide().fadeIn(410);
-		petla();
+	if(i < $(".list-group-item").length) setTimeout(function() {
+		$("#list"+i).css('display', 'flex').hide().fadeIn(410);
+		i++; petla();
 	}, 50);
 }
 petla();

@@ -15,13 +15,14 @@ use Symfony\Component\HttpFoundation\Response;
 	switch($id) {
 		case 1: $quWhere=" FROM inj WHERE wpis2=''"; break;
 		case 2: $quWhere=" FROM inj WHERE wpis2!=''"; break;
-		case 3: $quWhere=" FROM inj3 WHERE 1"; break;
+		case 3: $quWhere=" FROM inj3 WHERE 1=1"; break;
 		default: die("No ale nie bylo takiej czesci :("); break;
 	}
 
 	$query = $con->query("SELECT ip".$quWhere);
 	
 	$all = array();
+	
 	
 	while( $line = $query->fetch_assoc() ) {
 		if(!in_array(new TList($line['ip']), $all)) array_push($all, new TList($line['ip'])); // unikatowe
@@ -35,6 +36,7 @@ use Symfony\Component\HttpFoundation\Response;
 		$query = $con->query("SELECT count(1) AS ile".$quWhere." AND ip='$locip'");
 		$fetched = $query->fetch_assoc();
 		$all[$i]->setLicznik($fetched['ile']);
+
 		$query->close();
 	}
 
@@ -65,7 +67,7 @@ use Symfony\Component\HttpFoundation\Response;
 				$all[$j+1] = $buf;
 			}
 	}
-	
+	for($i=0; $i<count($all); $i++) $all[$i]->setI($i);
 	$con->close();
 
 	return $app['twig']->render('unique.twig', array( 'all' => $all, 'id' => $id, ));

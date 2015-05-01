@@ -17,7 +17,7 @@ class Tip {
 
 class TList {
 
-	private $ip; private $licznik; private $bot;
+	private $ip; private $licznik; private $bot; private $i;
 
 	public function __construct($ipp) { $this->ip = $ipp; }
 
@@ -27,10 +27,14 @@ class TList {
 
 	public function getBot() { return $this->bot; }
 
+	public function getI() { return $this->i; }
+
 	public function setIp($a) { $this->ip = $a; }
 
 	public function setLicznik($a) { $this->licznik = $a; }
 
 	public function setBot($a) { $this->bot = $a; }
+
+	public function setI($a) { $this->i = $a; }
 }
 ?>

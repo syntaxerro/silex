@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
  $app->get("/silex/unique/{id}", function($id) use ($app, $pwd) {
 	$con = new mysqli('localhost', 'root', $pwd, 'secret');
-	require_once __DIR__."/../myclass.php";	
+	require_once __DIR__ . "/../Model/myclass.php";
 	switch($id) {
 		case 1: $quWhere=" FROM inj WHERE wpis2=''"; break;
 		case 2: $quWhere=" FROM inj WHERE wpis2!=''"; break;
@@ -76,7 +76,7 @@ use Symfony\Component\HttpFoundation\Response;
 
  $app->get("/silex/{id}/ip/{ip}", function($id, $ip) use ($app, $pwd) {
 	$con = new mysqli("localhost", 'root', $pwd, 'secret');
-	require_once __DIR__."/../myclass.php";
+     require_once __DIR__ . "/../Model/myclass.php";
 	
 	switch($id) {
 	case 1: $query = $con->query("SELECT wpis, kiedy FROM inj WHERE wpis2='' AND ip='$ip'"); break;
@@ -107,7 +107,7 @@ use Symfony\Component\HttpFoundation\Response;
  
  $app->get("/silex/{id}/when/{when}", function($id, $when) use ($app, $pwd) {
 	$con = new mysqli("localhost", 'root', $pwd, 'secret');
-	require_once __DIR__."/../myclass.php";
+     require_once __DIR__ . "/../Model/myclass.php";
 	
 	switch($id) {
 	case 1: $query = $con->query("SELECT wpis, kiedy FROM inj WHERE wpis2='' AND kiedy LIKE '$when%'"); break;

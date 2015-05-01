@@ -9,11 +9,13 @@
 namespace Syntax\Model;
 
 
-class Tip {
+class Tip
+{
     private $wpis;
     private $wpis2;
     private $kiedy;
     private $i;
+
 
     public function __construct($w, $ws, $k, $li)
     {
@@ -23,37 +25,24 @@ class Tip {
         $this->wpis2 = $ws;
     }
 
-    /**
-     * @return mixed
-     */
     public function getWpis()
     {
         return $this->wpis;
     }
 
-    /**
-     * @return mixed
-     */
     public function getWpis2()
     {
         return $this->wpis2;
     }
 
-    /**
-     * @return mixed
-     */
     public function getKiedy()
     {
         return $this->kiedy;
     }
 
-    /**
-     * @return mixed
-     */
     public function getI()
     {
         return $this->i;
     }
-
 
 }

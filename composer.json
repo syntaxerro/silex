@@ -1,6 +1,27 @@
 {
- 	"require": {
-		"silex/silex": "~1.2",
- 	 	"twig/twig": "~1.18"
-	}
+  "name": "SyntaxError/sqlHistory",
+  "description": "Historia wszystkich prób logowania do gry we wstrzykiwanie kodu mySQL. ",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Syntax",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "silex/silex"           : "~1.2",
+    "twig/twig"             : "~1.18",
+    "symfony/security"      : "~2.3",
+    "symfony/translation"   : "~2.3",
+    "symfony/twig-bridge"   : "~2.3",
+    "symfony/validator"     : "~2.3",
+    "doctrine/dbal"         : "~2.3"
+
+  },
+    "autoload": {
+      "psr-0": {
+        "Syntax": "src/"
+      }
+    }
 }

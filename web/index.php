@@ -5,10 +5,10 @@ require __DIR__ . '/../resources/prod.php';
 require __DIR__ . '/../src/app.php';
 require __DIR__ . '/../src/controllers.php';
 
-
+use Syntax\Model\Tip;
+use Syntax\Model\TList;
 $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
     $con = new mysqli('localhost', 'root', $pwd, 'secret');
-    require_once __DIR__ . "/../myclass.php";
     switch ($id) {
         case 1:
             $quWhere = " FROM inj WHERE wpis2=''";
@@ -84,7 +84,6 @@ $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
 });
 $app->get("/silex/{id}/ip/{ip}", function ($id, $ip) use ($app, $pwd) {
     $con = new mysqli("localhost", 'root', $pwd, 'secret');
-    require_once __DIR__ . "/../myclass.php";
 
     switch ($id) {
         case 1:
@@ -122,8 +121,6 @@ $app->get("/silex/{id}/ip/{ip}", function ($id, $ip) use ($app, $pwd) {
 
 $app->get("/silex/{id}/when/{when}", function ($id, $when) use ($app, $pwd) {
     $con = new mysqli("localhost", 'root', $pwd, 'secret');
-    require_once __DIR__ . "/../myclass.php";
-
     switch ($id) {
         case 1:
             $query = $con->query("SELECT wpis, kiedy FROM inj WHERE wpis2='' AND kiedy LIKE '$when%'");

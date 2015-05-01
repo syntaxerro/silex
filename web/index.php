@@ -21,24 +21,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 	$query = $con->query("SELECT ip".$quWhere);
 	
-	$ips = array(); $cnt = array(); $bots = array(); // lamerskie tabliczki
+	$all = array();
 	
 	while( $line = $query->fetch_assoc() ) {
-		if(!in_array($line['ip'], $ips)) array_push($ips, $line['ip']); // unikatowe
+		if(!in_array(new TList($line['ip']), $all)) array_push($all, new TList($line['ip'])); // unikatowe
 	} 
 	
 	$query->close();
 
 	// Liczba wpisow
-	foreach($ips as $locip) {
+	for($i=0; $i<count($all); $i++) {
+		$locip = $all[$i]->getIp();
 		$query = $con->query("SELECT count(1) AS ile".$quWhere." AND ip='$locip'");
 		$fetched = $query->fetch_assoc();
-		array_push($cnt, $fetched['ile']);
+		$all[$i]->setLicznik($fetched['ile']);
 		$query->close();
 	}
 
 	// Czy bot?
-	foreach($ips as $locip) {
+	for($i=0; $i<count($all); $i++) {
+		$locip = $all[$i]->getIp();
 		if($id==2) $query = $con->query("SELECT LENGTH(wpis) AS sizew, wpis, wpis2".$quWhere." AND ip='$locip'");
 		else $query = $con->query("SELECT LENGTH(wpis) AS sizew, wpis".$quWhere." AND ip='$locip'");
 		$bt_loc=false;
@@ -50,17 +52,8 @@ use Symfony\Component\HttpFoundation\Response;
 				( isset($fetched['wpis2']) && preg_match("/0x[0-9]+/", $fetched['wpis2']) )
 			) $bt_loc=true;
 		}
-		array_push($bots, $bt_loc);
+		$all[$i]->setBot($bt_loc);
 		$query->close();
-	}
-
-
-	// Ustawianie obiektow
-	for($i=0; $i<count($ips); $i++) { 
-		$all[$i] = new TList;
-		$all[$i]->setIp($ips[$i]);
-		$all[$i]->setLicznik($cnt[$i]);
-		$all[$i]->setBot($bots[$i]);
 	}
 
 	// Sortowanie obiektow

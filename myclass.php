@@ -19,6 +19,8 @@ class TList {
 
 	private $ip; private $licznik; private $bot;
 
+	public function __construct($ipp) { $this->ip = $ipp; }
+
 	public function getIp() { return $this->ip; }
 
 	public function getLicznik() { return $this->licznik; }

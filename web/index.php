@@ -100,7 +100,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 	$query->close();
 	$con->close();
-	return $app['twig']->render('ipstory.twig', array( 'dane' => $dane, 'id' => $id, 'ip' => $ip, ) );
+	return $app['twig']->render('ipstory.twig', array( 'dane' => $dane, 'id' => $id, 'ip' => $ip, 'ile' => count($dane)) );
 
 
 

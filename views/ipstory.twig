@@ -12,7 +12,7 @@ body { padding-top: 70px; }
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
-			<ul class="nav nav-pills nav-justified"> 
+			<ul class="nav nav-pills nav-justified" style="margin-top: .4em;"> 
 			{% if id==1 %}
 				<li role="presentation" class="active"><a href="/silex/unique/1">mySQL Injection #1</a></li>
 				<li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
@@ -35,45 +35,30 @@ body { padding-top: 70px; }
 	</nav>
 
 {% if id==1 %}
-<div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
-	<span id="head_t">
-		<h5 style="font-weight: 600;">mySQL Injection #1</h5> 
-	</span>
-	<span>
-		Lista wpis&#xF3;w dla <span style="font-size: 1.4em;">{{ip}}</span>
-	</span>
-</div>
+<div class="panel panel-success" style="margin: .5em;">
 {% endif %}
 
 {% if id==2 %}
-<div class="alert alert-info" role="alert" style="display: flex; justify-content: space-between;">
-	<span id="head_t">
-		<h5 style="font-weight: 600;">mySQL Injection #2</h5> 
-	</span>
-	<span>
-		Lista wpis&#xF3;w dla <span style="font-size: 1.4em;">{{ip}}</span>
-	</span>
-</div>
+<div class="panel panel-info" style="margin: .5em;">
 {% endif %}
 
 {% if id==3 %}
-<div class="alert alert-warning" role="alert" style="display: flex; justify-content: space-between;">
-	<span id="head_t">
-		<h5 style="font-weight: 600;">mySQL Injection #3</h5> 
-	</span>
-	<span>
-		Lista wpis&#xF3;w dla <span style="font-size: 1.4em;">{{ip}}</span>
-	</span>
-</div>
+<div class="panel panel-warning" style="margin: .5em;">
 {% endif %}
 
+
+<div class="panel-heading" style="display: flex; justify-content: space-between;">
+		Liczba pr&#xF3;b: {{ile}} <span style="font-weight: 600;">{{ip}}</span>
+</div>
+<div class="panel-body">
+
 {% for item in dane %}
-<div class="panel panel-primary" style="display: none;" id="post{{item.i}}">
+<div class="panel panel-default" style="display: none;" id="post{{item.i}}">
 	<div class="panel-heading">
 		<h2 class="panel-title">{{item.kiedy}}</h2>
 	</div>
 	<div class="panel-body">
-		<span style="font-size: 1.3em;">{{item.wpis}}</span>
+		<span style="font-size: 1.3em; word-wrap: break-word;">{{item.wpis}}</span>
 	</div>
 	{% if id==2 %}
 	<div class="panel-body">
@@ -82,16 +67,17 @@ body { padding-top: 70px; }
 	{% endif %}
 </div>
 {% endfor %}
-
+	</div>
+</div>
 </body>
 <script>
 
 var i=0;
 
 function petla() {
-	if(i++ < $(".panel").length) setTimeout(function() {
+	if(i <= {{ile}}) setTimeout(function() {
 		$("#post"+i).fadeIn(410);
-		petla();
+		i++; petla();
 	}, 50);
 }
 petla();

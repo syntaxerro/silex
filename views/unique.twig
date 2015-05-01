@@ -12,7 +12,7 @@ body { padding-top: 70px; }
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
-			<ul class="nav nav-pills nav-justified"> 
+			<ul class="nav nav-pills nav-justified" style="margin-top: .4em;"> 
 			{% if id==1 %}
 				<li role="presentation" class="active"><a href="/silex/unique/1">mySQL Injection #1</a></li>
 				<li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
@@ -36,7 +36,7 @@ body { padding-top: 70px; }
 {% if id==1 %}
 <div class="panel panel-success" style="margin: .5em;">
 	<div class="panel-heading" style="display: flex; justify-content: space-between;">
-		<span id="head_t"><b>mySQL Injection #1</b> Lista unikalnych wizyt</span>
+		<span id="head_t" style="font-weight: 600;">Lista unikalnych wizyt</span>
 		<span style='font-weight: 600;'>Liczba pr&#xF3;b</span>
 	</div>
 	<div class="panel-body">
@@ -45,7 +45,7 @@ body { padding-top: 70px; }
 {% if id==2 %}
 <div class="panel panel-info" style="margin: .5em;">
 	<div class="panel-heading" style="display: flex; justify-content: space-between;">
-		<span id="head_t"><b>mySQL Injection #2</b> Lista unikalnych wizyt</span>
+		<span id="head_t" style="font-weight: 600;">Lista unikalnych wizyt</span>
 		<span style='font-weight: 600;'>Liczba pr&#xF3;b</span>
 	</div>
 	<div class="panel-body">
@@ -54,7 +54,7 @@ body { padding-top: 70px; }
 {% if id==3 %}
 <div class="panel panel-warning" style="margin: .5em;">
 	<div class="panel-heading" style="display: flex; justify-content: space-between;">
-		<span id="head_t"><b>mySQL Injection #3</b> Lista unikalnych wizyt</span>
+		<span id="head_t" style="font-weight: 600;">Lista unikalnych wizyt</span>
 		<span style='font-weight: 600;'>Liczba pr&#xF3;b</span>
 	</div>
 	<div class="panel-body">

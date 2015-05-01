@@ -34,22 +34,32 @@ body { padding-top: 70px; }
 		</div>	
 	</nav>
 {% if id==1 %}
-<div class="alert alert-success" role="alert" style="display: flex; justify-content: space-between;">
-<span id="head_t"><b>mySQL Injection #1</b> Lista unikalnych wizyt</span>
-<span style='font-weight: 600;'>Liczba pr&#xF3;b</span></div>
+<div class="panel panel-success" style="margin: .5em;">
+	<div class="panel-heading" style="display: flex; justify-content: space-between;">
+		<span id="head_t"><b>mySQL Injection #1</b> Lista unikalnych wizyt</span>
+		<span style='font-weight: 600;'>Liczba pr&#xF3;b</span>
+	</div>
+	<div class="panel-body">
 {% endif %}
 
 {% if id==2 %}
-<div class="alert alert-info" role="info" style="display: flex; justify-content: space-between;">
-<span id="head_t"><b>mySQL Injection #2</b> Lista unikalnych wizyt</span>
-<span style='font-weight: 600;'>Liczba pr&#xF3;b</span></div>
+<div class="panel panel-info" style="margin: .5em;">
+	<div class="panel-heading" style="display: flex; justify-content: space-between;">
+		<span id="head_t"><b>mySQL Injection #2</b> Lista unikalnych wizyt</span>
+		<span style='font-weight: 600;'>Liczba pr&#xF3;b</span>
+	</div>
+	<div class="panel-body">
 {% endif %}
 
 {% if id==3 %}
-<div class="alert alert-warning" role="warning" style="display: flex; justify-content: space-between;">
-<span id="head_t"><b>mySQL Injection #3</b> Lista unikalnych wizyt</span>
-<span style='font-weight: 600;'>Liczba pr&#xF3;b</span></div>
+<div class="panel panel-warning" style="margin: .5em;">
+	<div class="panel-heading" style="display: flex; justify-content: space-between;">
+		<span id="head_t"><b>mySQL Injection #3</b> Lista unikalnych wizyt</span>
+		<span style='font-weight: 600;'>Liczba pr&#xF3;b</span>
+	</div>
+	<div class="panel-body">
 {% endif %}
+
 <div class="list-group">
 {% for item in all %}
 <a href="/silex/{{id}}/ip/{{item.ip}}" class="list-group-item" style="display: none; justify-content: space-between;" id="list{{item.i}}">
@@ -66,6 +76,7 @@ body { padding-top: 70px; }
 
 </a>
 {% endfor %}
+</div>
 </div>
 </body>
 <script>

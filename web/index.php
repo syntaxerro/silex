@@ -86,15 +86,14 @@ use Symfony\Component\HttpFoundation\Response;
 	}
 	
 	$i=0;
-	if($id==2) {
-		while( $line = $query->fetch_assoc() ) {
-			$dane[$i++] = new Tip(htmlentities($line['wpis']), htmlentities($line['wpis2']), $line['kiedy'], $i);
-		}
-	} else {
-		while( $line = $query->fetch_assoc() ) {
+	if($id==2)
+		while( $line = $query->fetch_assoc() ) 
+			$dane[$i++] = new Tip(htmlentities($line['wpis']), htmlentities($line['wpis2']), $line['kiedy'], $i);		
+	else 
+		while( $line = $query->fetch_assoc() ) 
 			$dane[$i++] = new Tip(htmlentities($line['wpis']), null, $line['kiedy'], $i);
-		}
-	}
+		
+	
 	
 	
 

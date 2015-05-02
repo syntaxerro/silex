@@ -20,11 +20,11 @@ $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
         case 3:
             $quWhere = " FROM inj3 WHERE 1=1";
             break;
-        default:
-            $quWhere = "";
+       default:
+            return $app['twig']->render('404.html.twig');
             break;
     }
-    if($quWhere=='') return $app['twig']->render('404.html.twig');
+
     $all = array();
     $sql = "SELECT * ". $quWhere;
 
@@ -93,10 +93,10 @@ $app->get("/silex/{id}/ip/{ip}", function ($id, $ip) use ($app, $pwd) {
             $query = $app['db']->query("SELECT wpis, kiedy FROM inj3 WHERE ip='$ip'");
             break;
         default:
-            $query = "";
+            return $app['twig']->render('404.html.twig');
             break;
     }
-    if($query=='') return $app['twig']->render('404.html.twig');
+
     $i = 0;
     if ($id == 2) {
         while ($line = $query->fetch()) {
@@ -107,7 +107,7 @@ $app->get("/silex/{id}/ip/{ip}", function ($id, $ip) use ($app, $pwd) {
             $dane[$i++] = new Tip(htmlentities($line['wpis']), null, $line['kiedy'], $i);
         }
     }
-
+      if($i<=0) return $app['twig']->render('404.html.twig');
 
     return $app['twig']->render('ipstory.twig',
         array('dane' => $dane, 'id' => $id, 'ip' => $ip, 'ile' => count($dane)));

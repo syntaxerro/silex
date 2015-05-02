@@ -10,7 +10,6 @@ use Syntax\Model\TList;
 
 $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
 
-    $con = $app['db'];
     switch ($id) {
         case 1:
             $quWhere = " FROM inj WHERE wpis2=''";
@@ -46,9 +45,9 @@ $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
     for ($i = 0; $i < count($all); $i++) {
         $locip = $all[$i]->getIp();
         if ($id == 2) {
-            $query = $con->query("SELECT LENGTH(wpis) AS sizew, wpis, wpis2" . $quWhere . " AND ip='$locip'");
+            $query = $app['db']->query("SELECT LENGTH(wpis) AS sizew, wpis, wpis2" . $quWhere . " AND ip='$locip'");
         } else {
-            $query = $con->query("SELECT LENGTH(wpis) AS sizew, wpis" . $quWhere . " AND ip='$locip'");
+            $query = $app['db']->query("SELECT LENGTH(wpis) AS sizew, wpis" . $quWhere . " AND ip='$locip'");
         }
         $bt_loc = false;
         while ($fetched = $query->fetch()) {
@@ -81,16 +80,16 @@ $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
 });
 
 $app->get("/silex/{id}/ip/{ip}", function ($id, $ip) use ($app, $pwd) {
-    $con = $app['db'];
+
     switch ($id) {
         case 1:
-            $query = $con->query("SELECT wpis, kiedy FROM inj WHERE wpis2='' AND ip='$ip'");
+            $query = $app['db']->query("SELECT wpis, kiedy FROM inj WHERE wpis2='' AND ip='$ip'");
             break;
         case 2:
-            $query = $con->query("SELECT wpis, wpis2, kiedy FROM inj WHERE wpis2!='' AND ip='$ip'");
+            $query = $app['db']->query("SELECT wpis, wpis2, kiedy FROM inj WHERE wpis2!='' AND ip='$ip'");
             break;
         case 3:
-            $query = $con->query("SELECT wpis, kiedy FROM inj3 WHERE ip='$ip'");
+            $query = $app['db']->query("SELECT wpis, kiedy FROM inj3 WHERE ip='$ip'");
             break;
         default:
             die("Nie bylo tego :(");

@@ -21,9 +21,10 @@ $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
             $quWhere = " FROM inj3 WHERE 1=1";
             break;
         default:
-            die("No ale nie bylo takiej czesci :(");
+            $quWhere = "";
             break;
     }
+    if($quWhere=='') $app['twig']->render('404.html.twig');
     $all = array();
     $sql = "SELECT * ". $quWhere;
 

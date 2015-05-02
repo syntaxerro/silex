@@ -24,7 +24,7 @@ $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
             $quWhere = "";
             break;
     }
-    if($quWhere=='') $app['twig']->render('404.html.twig');
+    if($quWhere=='') return $app['twig']->render('404.html.twig');
     $all = array();
     $sql = "SELECT * ". $quWhere;
 
@@ -93,10 +93,10 @@ $app->get("/silex/{id}/ip/{ip}", function ($id, $ip) use ($app, $pwd) {
             $query = $app['db']->query("SELECT wpis, kiedy FROM inj3 WHERE ip='$ip'");
             break;
         default:
-            die("Nie bylo tego :(");
+            $query = "";
             break;
     }
-
+    if($query=='') return $app['twig']->render('404.html.twig');
     $i = 0;
     if ($id == 2) {
         while ($line = $query->fetch()) {

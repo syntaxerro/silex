@@ -42,27 +42,48 @@ $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
         $fetched = $query->fetch();
         $all[$i]->setLicznik($fetched['ile']);
     }
+
     // Czy bot?
-    for ($i = 0; $i < count($all); $i++) {
-        $locip = $all[$i]->getIp();
-        if ($id == 2) {
-            $query = $app['db']->query("SELECT LENGTH(wpis) AS sizew, wpis, wpis2" . $quWhere . " AND ip='$locip'");
-        } else {
-            $query = $app['db']->query("SELECT LENGTH(wpis) AS sizew, wpis" . $quWhere . " AND ip='$locip'");
-        }
-        $bt_loc = false;
-        while ($fetched = $query->fetch()) {
-            if ($fetched['sizew'] > 120 ||
-                preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis']) ||
-                preg_match("/0x[0-9]+/", $fetched['wpis']) ||
-                (isset($fetched['wpis2']) && preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis2'])) ||
-                (isset($fetched['wpis2']) && preg_match("/0x[0-9]+/", $fetched['wpis2']))
-            ) {
+    if($id==2) {
+
+        for ($i = 0; $i < count($all); $i++) {
+            $locip = $all[$i]->getIp();
+            $query = $app['db']->query("SELECT LENGTH(wpis) AS sizew, wpis, wpis2, LENGTH(wpis2) as sizew2".$quWhere." AND ip='$locip'");
+
+            $bt_loc = false;
+            while ($fetched = $query->fetch()) {
+                if($fetched['sizew'] > 120 ||
+                    $fetched['sizew2'] > 120 ||
+                    preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis']) ||
+                    preg_match("/0x[0-9]+/", $fetched['wpis']) ||
+                    preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis2']) ||
+                    preg_match("/0x[0-9]+/", $fetched['wpis2'])
+                ) {
                 $bt_loc = true;
+                }
             }
+            $all[$i]->setBot($bt_loc);
         }
-        $all[$i]->setBot($bt_loc);
+
+    } else {
+
+         for ($i = 0; $i < count($all); $i++) {
+            $locip = $all[$i]->getIp();
+            $query = $app['db']->query("SELECT LENGTH(wpis) AS sizew, wpis".$quWhere." AND ip='$locip'");
+
+            $bt_loc = false;
+            while ($fetched = $query->fetch()) {
+                if($fetched['sizew'] > 120 ||
+                    preg_match("/[0-9][0-9]+=[0-9][0-9]+/", $fetched['wpis']) ||
+                    preg_match("/0x[0-9]+/", $fetched['wpis'])
+                ) {
+                $bt_loc = true;
+                }
+            }
+            $all[$i]->setBot($bt_loc);
+        }
     }
+
     // Sortowanie obiektow
     for ($i = 0; $i < count($all); $i++) {
         for ($j = 0; $j < count($all) - 1; $j++) {

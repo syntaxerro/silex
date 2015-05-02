@@ -1,7 +1,5 @@
 {% extends'base.html.twig' %}
 {% block navbar %}
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
         <ul class="nav nav-pills nav-justified" style="margin-top: .4em;">
             {% if id==1 %}
                 <li role="presentation" class="active"><a href="/silex/unique/1">mySQL Injection #1</a></li>
@@ -21,8 +19,6 @@
                 <li role="presentation" class="active"><a href="/silex/unique/3">mySQL Injection #3</a></li>
             {% endif %}
         </ul>
-    </div>
-</nav>
         {% endblock %}
 
         {% block body %}

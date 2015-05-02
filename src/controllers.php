@@ -113,4 +113,7 @@ $app->get("/silex/{id}/ip/{ip}", function ($id, $ip) use ($app, $pwd) {
         array('dane' => $dane, 'id' => $id, 'ip' => $ip, 'ile' => count($dane)));
 });
 
+$app->get('/' , function() use ($app) {
+    return  $app['twig']->render('index.html.twig');
+});
 return $app;

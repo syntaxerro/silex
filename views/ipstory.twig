@@ -1,85 +1,77 @@
-<!DOCTYPE html>
-<html><head>
-<script src="/js/jq2.1.3.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.min.css"/>
-<script src="/js/bootstrap.min.js"></script>
-<link rel="shortcut icon" href="/img/inj.png"/>
-<style>
-body { padding-top: 70px; }
-</style>
-<title>SQL History</title>
-</head>
-<body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<ul class="nav nav-pills nav-justified" style="margin-top: .4em;"> 
-			{% if id==1 %}
-				<li role="presentation" class="active"><a href="/silex/unique/1">mySQL Injection #1</a></li>
-				<li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
-				<li role="presentation"><a href="/silex/unique/3">mySQL Injection #3</a></li>
-			{% endif %}
+{% extends 'base.html.twig' %}
 
-			{% if id==2 %}
-				<li role="presentation"><a href="/silex/unique/1">mySQL Injection #1</a></li>
-				<li role="presentation" class="active"><a href="/silex/unique/2">mySQL Injection #2</a></li>
-				<li role="presentation"><a href="/silex/unique/3">mySQL Injection #3</a></li>
-			{% endif %}
+{% block navbar %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <ul class="nav nav-pills nav-justified" style="margin-top: .4em;">
+            {% if id==1 %}
+                <li role="presentation" class="active"><a href="/silex/unique/1">mySQL Injection #1</a></li>
+                <li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
+                <li role="presentation"><a href="/silex/unique/3">mySQL Injection #3</a></li>
+            {% endif %}
 
-			{% if id==3 %}
-				<li role="presentation"><a href="/silex/unique/1">mySQL Injection #1</a></li>
-				<li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
-				<li role="presentation" class="active"><a href="/silex/unique/3">mySQL Injection #3</a></li>
-			{% endif %}
-			</ul>
-		</div>	
-	</nav>
+            {% if id==2 %}
+                <li role="presentation"><a href="/silex/unique/1">mySQL Injection #1</a></li>
+                <li role="presentation" class="active"><a href="/silex/unique/2">mySQL Injection #2</a></li>
+                <li role="presentation"><a href="/silex/unique/3">mySQL Injection #3</a></li>
+            {% endif %}
 
-{% if id==1 %}
-<div class="panel panel-success" style="margin: .5em;">
-{% endif %}
+            {% if id==3 %}
+                <li role="presentation"><a href="/silex/unique/1">mySQL Injection #1</a></li>
+                <li role="presentation"><a href="/silex/unique/2">mySQL Injection #2</a></li>
+                <li role="presentation" class="active"><a href="/silex/unique/3">mySQL Injection #3</a></li>
+            {% endif %}
+        </ul>
+        {% endblock %}
 
-{% if id==2 %}
-<div class="panel panel-info" style="margin: .5em;">
-{% endif %}
+        {% block body %}
+        {% if id==1 %}
+        <div class="panel panel-success" style="margin: .5em;">
+            {% endif %}
 
-{% if id==3 %}
-<div class="panel panel-warning" style="margin: .5em;">
-{% endif %}
+            {% if id==2 %}
+            <div class="panel panel-info" style="margin: .5em;">
+                {% endif %}
+
+                {% if id==3 %}
+                <div class="panel panel-warning" style="margin: .5em;">
+                    {% endif %}
 
 
-<div class="panel-heading" style="display: flex; justify-content: space-between;">
-		Liczba pr&#xF3;b: {{ile}} <span style="font-weight: 600;">{{ip}}</span>
-</div>
-<div class="panel-body">
+                    <div class="panel-heading" style="display: flex; justify-content: space-between;">
+                        Liczba pr&#xF3;b: {{ ile }} <span style="font-weight: 600;">{{ ip }}</span>
+                    </div>
+                    <div class="panel-body">
 
-{% for item in dane %}
-<div class="panel panel-default" style="display: none;" id="post{{item.i}}">
-	<div class="panel-heading">
-		<h2 class="panel-title">{{item.kiedy}}</h2>
-	</div>
-	<div class="panel-body">
-		<span style="font-size: 1.1em; word-wrap: break-word;">{{item.wpis}}</span>
-	</div>
-	{% if id==2 %}
-	<div class="panel-body">
-		<span style="font-size: 1.1em;">{{item.wpis2}}</span>
-	</div>
-	{% endif %}
-</div>
-{% endfor %}
-	</div>
-</div>
-</body>
-<script>
+                        {% for item in dane %}
+                            <div class="panel panel-default" style="display: none;" id="post{{ item.i }}">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">{{ item.kiedy }}</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <span style="font-size: 1.1em; word-wrap: break-word;">{{ item.wpis }}</span>
+                                </div>
+                                {% if id==2 %}
+                                    <div class="panel-body">
+                                        <span style="font-size: 1.1em;">{{ item.wpis2 }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                </body>
+                <script>
 
-var i=0;
+                    var i = 0;
 
-function petla() {
-	if(i <= {{ile}}) setTimeout(function() {
-		$("#post"+i).fadeIn(410);
-		i++; petla();
-	}, 50);
-}
-petla();
-</script>
-</html>
+                    function petla() {
+                        if (i <= {{ile}}) setTimeout(function () {
+                            $("#post" + i).fadeIn(410);
+                            i++;
+                            petla();
+                        }, 50);
+                    }
+                    petla();
+                </script>
+{% endblock %}

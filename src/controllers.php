@@ -5,8 +5,8 @@
  * Date: 01.05.15
  * Time: 20:17
  */
-use Syntax\Model\Tip;
-use Syntax\Model\TList;
+use Model\Tip;
+use Model\TList;
 
 $app->get("/silex/unique/{id}", function ($id) use ($app, $pwd) {
 

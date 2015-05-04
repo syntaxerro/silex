@@ -6,7 +6,7 @@
  * Time: 20:07
  */
 
-namespace Syntax\Model;
+namespace Model;
 
 
 class Tip

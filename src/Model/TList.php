@@ -6,7 +6,7 @@
  * Time: 20:08
  */
 
-namespace Syntax\Model;
+namespace Model;
 
 
 class TList
